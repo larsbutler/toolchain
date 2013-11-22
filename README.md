@@ -7,22 +7,24 @@ _How to build the full toolchain from scratch_
 
 0. Install prerequisites:
 
-    `sudo apt-get install libc6-dev-i386 libglib2.0-dev pkg-config git build-essential automake autoconf libtool g++-multilib texinfo flex bison groff`
+    <pre>
+    sudo apt-get install libc6-dev-i386 libglib2.0-dev pkg-config git build-essential automake autoconf libtool g++-multilib texinfo flex bison groff
+    </pre>
 
     Install zeromq >= 3.2.4
 
-    You can install it manually (don't forget to `sudo ldconfig` after install) 
-    
+    You can install it manually (don't forget to `sudo ldconfig` after install)
+
     or through these packages:
-    
+
     `http://zvm.rackspace.com/v1/repo/ubuntu/pool/main/z/zeromq3/libzmq3_4.0.1-ubuntu1_amd64.deb`
     `http://zvm.rackspace.com/v1/repo/ubuntu/pool/main/z/zeromq3/libzmq3-dev_4.0.1-ubuntu1_amd64.deb`
-    
+
     or by following the ZeroVM installation guide on http://zerovm.org/wiki/Download
 
-1. Set up environment variables. You need to set them up prior to downloading and building anything. 
+1. Set up environment variables. You need to set them up prior to downloading and building anything.
     Or just set it up to the directories where you already downloaded/cloned.
-  
+
     `ZEROVM_ROOT` - should point to git clone of `zerovm` repository
 
         export ZEROVM_ROOT=$HOME/zerovm
@@ -67,8 +69,8 @@ _How to build the full toolchain from scratch_
     cd $HOME/zvm-toolchain
     make -j8
     </pre>
-    
-    If something goes wrong you will need to DELETE everything (apart from zerovm and validator) 
+
+    If something goes wrong you will need to DELETE everything (apart from zerovm and validator)
     in the $ZVM_PREFIX directory and only then do `make clean` and `make` (this is how the gcc toolchain works, sadly).
 
     Example of cleanup procedures:
