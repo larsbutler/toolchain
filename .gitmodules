@@ -13,3 +13,6 @@
 [submodule "SRC/binutils"]
 	path = SRC/binutils
 	url = https://github.com/zerovm/binutils.git
+[submodule "SRC/gdb"]
+	path = SRC/gdb
+	url = https://github.com/zerovm/gdb.git
