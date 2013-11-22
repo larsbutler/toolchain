@@ -42,19 +42,13 @@ _How to build the full toolchain from scratch_
     git clone https://github.com/zerovm/zerovm.git $ZEROVM_ROOT
     git clone https://github.com/zerovm/validator.git $ZEROVM_ROOT/valz
     </pre>
-    
+
     <pre>
     git clone https://github.com/zerovm/zrt.git $ZRT_ROOT
     </pre>
-    
+
     <pre>
-    git clone https://github.com/zerovm/toolchain.git $HOME/zvm-toolchain
-    cd $HOME/zvm-toolchain/SRC
-    git clone https://github.com/zerovm/linux-headers-for-nacl.git
-    git clone https://github.com/zerovm/gcc.git
-    git clone https://github.com/zerovm/glibc.git
-    git clone https://github.com/zerovm/newlib.git
-    git clone https://github.com/zerovm/binutils.git
+    git clone --recursive https://github.com/zerovm/toolchain.git $HOME/zvm-toolchain
     </pre>
 
 3. Build zerovm
