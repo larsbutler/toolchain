@@ -38,22 +38,20 @@ _How to build the full toolchain from scratch_
 
         export ZRT_ROOT=$HOME/zrt
 
+    Add the location for the `zerovm` executable to the `PATH`:
+
+        export PATH=$ZVM_PREFIX/bin:$PATH
+
 2. Clone things:
 
     <pre>
     git clone https://github.com/zerovm/zerovm.git $ZEROVM_ROOT
     git clone https://github.com/zerovm/validator.git $ZEROVM_ROOT/valz
-    </pre>
-
-    <pre>
     git clone https://github.com/zerovm/zrt.git $ZRT_ROOT
-    </pre>
-
-    <pre>
     git clone --recursive https://github.com/zerovm/toolchain.git $HOME/zvm-toolchain
     </pre>
 
-3. Build zerovm
+3. Build `zerovm`
 
     <pre>
     cd $ZEROVM_ROOT/valz
@@ -87,7 +85,6 @@ _How to build the full toolchain from scratch_
 5. Now you can run zerovm tests
 
     <pre>
-    export PATH=$ZVM_PREFIX/bin:$PATH
     cd $ZEROVM_ROOT
     ./ftests.sh
     </pre>
@@ -101,13 +98,10 @@ _How to build the full toolchain from scratch_
     </pre>
 
     <pre>
-    cd $HOME/zvm-toolchain/SRC
-    git clone https://github.com/zerovm/gdb.git
-    cd gdb
+    cd $HOME/zvm-toolchain/SRC/gdb
     mkdir BUILD
     cd BUILD
     ../configure --program-prefix=x86_64-nacl- --prefix=$ZVM_PREFIX
     make -j4
     make install
     </pre>
-
