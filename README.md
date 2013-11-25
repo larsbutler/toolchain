@@ -25,21 +25,17 @@ _How to build the full toolchain from scratch_
 1. Set up environment variables. You need to set them up prior to downloading and building anything.
     Or just set it up to the directories where you already downloaded/cloned.
 
-    `ZEROVM_ROOT` - should point to git clone of `zerovm` repository
+    * `ZEROVM_ROOT` - should point to git clone of `zerovm` repository
+    * `ZVM_PREFIX` - should point to an *empty writable directory*
+      all files will be installed here after `make install`
+    * `ZRT_ROOT` - should point to git clone of `zrt` repository
+    * Add the location for the `zerovm` executable to the `PATH`
+
+    Example:
 
         export ZEROVM_ROOT=$HOME/zerovm
-
-    `ZVM_PREFIX` - should point to an *empty writable directory*
-    all files will be installed here after `make install`
-
         export ZVM_PREFIX=$HOME/zvm-root
-
-    `ZRT_ROOT` - should point to git clone of `zrt` repository
-
         export ZRT_ROOT=$HOME/zrt
-
-    Add the location for the `zerovm` executable to the `PATH`:
-
         export PATH=$ZVM_PREFIX/bin:$PATH
 
 2. Clone things:
