@@ -5,99 +5,84 @@ _How to build the full toolchain from scratch_
 
 ----
 
-0. Install prerequisites:
+1. Install prerequisites
 
-    <pre>
-    sudo apt-get install libc6-dev-i386 libglib2.0-dev pkg-config git build-essential automake autoconf libtool g++-multilib texinfo flex bison groff
-    </pre>
+    Ubuntu:
 
-    Install zeromq >= 3.2.4
+        sudo su -c 'echo "deb [ arch=amd64 ] http://zvm.rackspace.com/v1/repo/ubuntu/ precise main" > /etc/apt/sources.list.d/zerovm-precise.list'
+        wget -O- https://zvm.rackspace.com/v1/repo/ubuntu/zerovm.pkg.key | sudo apt-key add -
+        sudo apt-get update
+        sudo apt-get install build-essential flex git groff libc6-dev-i386 g++-multilib autoconf automake libtool libzmq3-dev bison libglib2.0-dev texinfo pkg-config
 
-    You can install it manually (don't forget to `sudo ldconfig` after install)
+2. Set environment variables
 
-    or through these packages:
-
-    `http://zvm.rackspace.com/v1/repo/ubuntu/pool/main/z/zeromq3/libzmq3_4.0.1-ubuntu1_amd64.deb`
-    `http://zvm.rackspace.com/v1/repo/ubuntu/pool/main/z/zeromq3/libzmq3-dev_4.0.1-ubuntu1_amd64.deb`
-
-    or by following the ZeroVM installation guide on http://zerovm.org/wiki/Download
-
-1. Set up environment variables. You need to set them up prior to downloading and building anything.
-    Or just set it up to the directories where you already downloaded/cloned.
-
-    * `ZEROVM_ROOT` - should point to git clone of `zerovm` repository
-    * `ZVM_PREFIX` - should point to an *empty writable directory*
-      all files will be installed here after `make install`
-    * `ZRT_ROOT` - should point to git clone of `zrt` repository
-    * Add the location for the `zerovm` executable to the `PATH`
-
-    Example:
+    This guide assumes your working directory is `$HOME`, but you can use any base directory.
 
         export ZEROVM_ROOT=$HOME/zerovm
         export ZVM_PREFIX=$HOME/zvm-root
         export ZRT_ROOT=$HOME/zrt
         export PATH=$ZVM_PREFIX/bin:$PATH
 
-2. Clone things:
+3. Clone things
 
-    <pre>
+    ```
     git clone https://github.com/zerovm/zerovm.git $ZEROVM_ROOT
     git clone https://github.com/zerovm/validator.git $ZEROVM_ROOT/valz
     git clone https://github.com/zerovm/zrt.git $ZRT_ROOT
     git clone --recursive https://github.com/zerovm/toolchain.git $HOME/zvm-toolchain
-    </pre>
+    ```
 
-3. Build `zerovm`
+4. Build zerovm
 
-    <pre>
+    ```
     cd $ZEROVM_ROOT/valz
     make validator
     sudo make install
     cd $ZEROVM_ROOT
     make all install PREFIX=$ZVM_PREFIX
-    </pre>
+    ```
 
-4. Build toolchain
+5. Build toolchain
 
-    <pre>
+    ```
     cd $HOME/zvm-toolchain
     make -j8
-    </pre>
+    ```
 
     If something goes wrong you will need to DELETE everything (apart from zerovm and validator)
     in the $ZVM_PREFIX directory and only then do `make clean` and `make` (this is how the gcc toolchain works, sadly).
 
     Example of cleanup procedures:
 
-    <pre>
+    ```
     cd $HOME/zvm-toolchain
     make clean
     cd $ZVM_PREFIX
     rm -fr *
     cd $ZEROVM_ROOT
     make install PREFIX=$ZVM_PREFIX
-    </pre>
+    ```
 
-5. Now you can run zerovm tests
+6. Run ZeroVM tests
 
-    <pre>
+    ```
     cd $ZEROVM_ROOT
     ./ftests.sh
-    </pre>
+    ```
 
-6. Install debugger
+7. Install debugger
 
     Debugger prerequisites:
 
-    <pre>
-    sudo apt-get install flex bison groff libncurses5-dev libexpat1-dev
-    </pre>
+    ```
+    sudo apt-get install libncurses5-dev libexpat1-dev
+    ```
 
-    <pre>
+    ```
     cd $HOME/zvm-toolchain/SRC/gdb
     mkdir BUILD
     cd BUILD
     ../configure --program-prefix=x86_64-nacl- --prefix=$ZVM_PREFIX
     make -j4
     make install
-    </pre>
+    ```
