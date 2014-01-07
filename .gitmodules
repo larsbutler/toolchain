@@ -1,0 +1,15 @@
+[submodule "SRC/binutils"]
+	path = SRC/binutils
+	url = https://github.com/zerovm/binutils.git
+[submodule "SRC/gcc"]
+	path = SRC/gcc
+	url = https://github.com/zerovm/gcc.git
+[submodule "SRC/newlib"]
+	path = SRC/newlib
+	url = https://github.com/zerovm/newlib.git
+[submodule "SRC/linux-headers-for-nacl"]
+	path = SRC/linux-headers-for-nacl
+	url = https://github.com/zerovm/linux-headers-for-nacl.git
+[submodule "SRC/glibc"]
+	path = SRC/glibc
+	url = https://github.com/zerovm/glibc.git
