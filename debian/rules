@@ -8,26 +8,24 @@
 
 # Uncomment this to turn on verbose mode.
 #export DH_VERBOSE=1
-export ZRT_ROOT=${CURDIR}/zrt
-export ZVM_DESTDIR=${CURDIR}/debian/gcc-4.4.3-zerovm
-export ZVM_PREFIX=/usr
+# export ZRT_ROOT=${CURDIR}/zrt
+export ZVM_DESTDIR=${CURDIR}/debian/zvm-toolchain
+# export ZVM_PREFIX=/usr
 
 %:
-	dh $@ 
+	dh $@
 
 override_dh_auto_build:
 	make -j16
-	rm -fr debian/gcc-4.4.3-zerovm/$(ZVM_PREFIX).saved
-	mv debian/gcc-4.4.3-zerovm/$(ZVM_PREFIX) debian/$(ZVM_PREFIX).saved
-	mkdir debian/gcc-4.4.3-zerovm/$(ZVM_PREFIX)
-	#tar cvf gcc-zerovm.tar debian/gcc-4.4.3-zerovm/$(ZVM_PREFIX)
+	rm -fr debian/zvm-toolchain/$(ZVM_PREFIX).saved
+	mv debian/zvm-toolchain/$(ZVM_PREFIX) debian/$(ZVM_PREFIX).saved
+	mkdir debian/zvm-toolchain/$(ZVM_PREFIX)
 
 override_dh_auto_test:
 
 override_dh_auto_install:
-	rm -fr debian/gcc-4.4.3-zerovm/$(ZVM_PREFIX)
-	mv debian/$(ZVM_PREFIX).saved debian/gcc-4.4.3-zerovm/$(ZVM_PREFIX)
-#	tar xvf gcc-zerovm.tar
+	rm -fr debian/zvm-toolchain/$(ZVM_PREFIX)
+	mv debian/$(ZVM_PREFIX).saved debian/zvm-toolchain/$(ZVM_PREFIX)
 
 override_dh_strip:
 	dh_strip -Xx86_64-nacl
